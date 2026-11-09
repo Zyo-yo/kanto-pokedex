@@ -9,8 +9,8 @@ class PokemonController < ApplicationController
     results = Pokemon.order(:dex_number)
 
     if @query.present?
-      name = Pokemon.sanitize_sql_like(@query.downcase.tr(" ", "-"))
-      results = results.where("LOWER(pokemon.identifier) LIKE ?", "%#{name}%")
+      name = Pokemon.sanitize_sql_like(@query.downcase.tr(" ", "-"), "!")
+      results = results.where("LOWER(pokemon.identifier) LIKE ? ESCAPE '!'", "%#{name}%")
     end
     if @type_id
       results = results.joins(:pokemon_typings).where(pokemon_typings: { elemental_type_id: @type_id })
