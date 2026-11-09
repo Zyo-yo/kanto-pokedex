@@ -64,6 +64,62 @@ a:hover { color: #0a382b; }
   overflow-wrap: anywhere;
 }
 
+.pokemon-type-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: .75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.pokemon-type-tile {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .8rem;
+  padding: .85rem;
+  height: 100%;
+  border: 1px solid currentColor;
+  border-radius: .85rem;
+  background: var(--type-bg, #e6f1e9);
+  color: var(--type-fg, #185644);
+  text-decoration: none;
+}
+
+.pokemon-type-tile:hover {
+  color: var(--type-fg, #185644);
+  box-shadow: 0 3px 0 currentColor;
+}
+
+.pokemon-type-tile:hover .pokemon-type-name { text-decoration: underline; }
+
+.pokemon-type-slot {
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  aspect-ratio: 1;
+  border-radius: .65rem;
+  background: var(--type-fg, #185644);
+  color: #fff;
+  font-size: .85rem;
+  font-weight: 800;
+}
+
+.pokemon-type-label,
+.pokemon-type-name { display: block; }
+.pokemon-type-label {
+  font-size: .7rem;
+  font-weight: 750;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+}
+.pokemon-type-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.pokemon-type-arrow { font-size: 1.2rem; }
+
 .pokemon-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));

@@ -1,12 +1,30 @@
 <% content_for :title, @pokemon.display_name %>
 <p><%= link_to "← Pokédex", root_path %></p>
-<div class="row g-4">
-  <section class="col-lg-7">
+<div class="row justify-content-center">
+  <section class="col-lg-9">
     <div class="catalog-card p-4">
       <p class="eyebrow">#<%= format("%03d", @pokemon.dex_number) %></p>
       <h1 class="pokemon-detail-name"><%= @pokemon.display_name %></h1>
       <%= image_tag "/sprites/#{@pokemon.dex_number}.png", alt: "", width: 272, height: 272,
         class: "pokemon-sprite pokemon-sprite-detail" %>
+      <section class="pokemon-types mt-4" aria-labelledby="pokemon-types-heading">
+        <h2 id="pokemon-types-heading" class="h5 mb-3">Elemental types</h2>
+        <ol class="pokemon-type-list mb-0">
+          <% @pokemon.pokemon_typings.each do |typing| %>
+            <% type = typing.elemental_type %>
+            <li>
+              <%= link_to elemental_type_path(type), class: "pokemon-type-tile type-#{type.identifier}" do %>
+                <span class="pokemon-type-slot" aria-hidden="true"><%= format("%02d", typing.slot) %></span>
+                <span>
+                  <span class="pokemon-type-label"><%= typing.slot == 1 ? "Primary type" : "Secondary type" %></span>
+                  <span class="pokemon-type-name"><%= type.display_name %></span>
+                </span>
+                <span class="pokemon-type-arrow" aria-hidden="true">↗</span>
+              <% end %>
+            </li>
+          <% end %>
+        </ol>
+      </section>
       <dl class="pokemon-stats mt-4 mb-0">
         <div class="pokemon-stat">
           <dt>Source identifier</dt>
@@ -25,17 +43,6 @@
           <dd><%= @pokemon.base_experience || "Unavailable" %></dd>
         </div>
       </dl>
-    </div>
-  </section>
-  <section class="col-lg-5">
-    <div class="catalog-card p-4 h-100">
-      <h2 class="h4">Elemental types</h2>
-      <ol class="mb-0 ps-4">
-        <% @pokemon.pokemon_typings.each do |typing| %>
-          <% type = typing.elemental_type %>
-          <li><%= link_to type.display_name, elemental_type_path(type), class: "type-pill type-#{type.identifier}" %></li>
-        <% end %>
-      </ol>
     </div>
   </section>
 </div>
