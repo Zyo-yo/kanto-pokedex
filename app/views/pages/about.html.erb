@@ -1,0 +1,29 @@
+<% content_for :title, "About" %>
+<p class="eyebrow">FIELD GUIDE / PROJECT NOTES</p>
+<h1>About this Pokédex</h1>
+<p class="lead">A Rails catalog of the original 151 Pokémon and their types as recorded by PokéAPI.</p>
+
+<div class="row g-4 mt-2">
+  <section class="col-lg-6">
+    <h2>Data sources</h2>
+    <p>The seed script reads three bundled extracts from the <%= link_to "PokéAPI CSV collection",
+      "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv" %>.</p>
+    <dl>
+      <dt><code>pokemon.csv</code></dt>
+      <dd>Default entries with source IDs 1–151 supply names, height in decimeters, weight in hectograms, and base experience.</dd>
+      <dt><code>types.csv</code></dt>
+      <dd>Type IDs and names supply the elemental types used by those entries.</dd>
+      <dt><code>pokemon_types.csv</code></dt>
+      <dd>Pokémon and type IDs pair each entry with its primary or secondary type.</dd>
+    </dl>
+  </section>
+  <section class="col-lg-6">
+    <h2>How the data connects</h2>
+    <p>The importer uses the CSV IDs to match records. Rails assigns its own primary keys, and the join table stores those keys alongside the type slot.</p>
+    <p>One Pokémon can have up to two types. One type can belong to many Pokémon. The type pages and search dropdown use that same relationship.</p>
+  </section>
+  <section class="col-12">
+    <h2>Database diagram</h2>
+    <img class="erd" src="/erd.svg" width="960" height="280" alt="Each Pokémon and each elemental type can have many Pokémon typings. A Pokémon typing belongs to exactly one Pokémon and one elemental type.">
+  </section>
+</div>
