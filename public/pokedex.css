@@ -32,6 +32,24 @@ a:hover { color: #0a382b; }
   border-radius: .8rem;
 }
 
+.pokemon-sprite {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.pokemon-sprite-card {
+  margin: 0 auto 1rem;
+}
+
+.pokemon-sprite-detail {
+  margin: 1rem auto 0;
+  border-radius: .8rem;
+  background: radial-gradient(circle, #e6f1e9 0%, #f7f5ef 74%);
+}
+
 .type-pill {
   display: inline-block;
   margin: .25rem .25rem 0 0;

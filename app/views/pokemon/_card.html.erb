@@ -1,5 +1,7 @@
 <li class="col">
   <div class="catalog-card h-100 p-4">
+    <%= image_tag "/sprites/#{entry.dex_number}.png", alt: "", width: 112, height: 112,
+      loading: "lazy", class: "pokemon-sprite pokemon-sprite-card" %>
     <p class="eyebrow mb-2">#<%= format("%03d", entry.dex_number) %></p>
     <h2 class="h4"><%= link_to entry.display_name, pokemon_path(entry) %></h2>
     <% entry.elemental_types.each do |type| %>

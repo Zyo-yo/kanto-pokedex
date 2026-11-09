@@ -1,0 +1,2 @@
+Pokémon HOME sprites for National Pokédex numbers 1–151.
+https://github.com/PokeAPI/sprites/tree/1b3b7c0a538dd2226ae08d0d2f8955125075bbd4/sprites/pokemon/other/home

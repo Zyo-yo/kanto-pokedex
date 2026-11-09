@@ -5,6 +5,8 @@
     <div class="catalog-card p-4">
       <p class="eyebrow">#<%= format("%03d", @pokemon.dex_number) %></p>
       <h1><%= @pokemon.display_name %></h1>
+      <%= image_tag "/sprites/#{@pokemon.dex_number}.png", alt: "", width: 272, height: 272,
+        class: "pokemon-sprite pokemon-sprite-detail" %>
       <dl class="row mb-0 mt-4">
         <dt class="col-6">Source identifier</dt>
         <dd class="col-6"><%= @pokemon.identifier %></dd>
