@@ -1,0 +1,7 @@
+<% content_for :title, @type.display_name %>
+<p><%= link_to "← All types", elemental_types_path %></p>
+<h1><%= @type.display_name %></h1>
+<p class="text-body-secondary">PokéAPI type ID <%= @type.source_id %> · <%= pluralize(@pokemon.size, "entry") %></p>
+<ul class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 list-unstyled">
+  <%= render partial: "pokemon/card", collection: @pokemon, as: :entry %>
+</ul>

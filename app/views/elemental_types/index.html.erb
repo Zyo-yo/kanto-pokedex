@@ -1,0 +1,11 @@
+<% content_for :title, "Types" %>
+<p class="eyebrow">FIELD GUIDE / CLASSIFICATION</p>
+<h1>Elemental types</h1>
+<p class="lead">Choose a type to see which Kanto Pokémon share it.</p>
+<ul class="row row-cols-2 row-cols-md-3 g-3 list-unstyled mt-3">
+  <% @types.each do |type| %>
+    <li class="col">
+      <%= link_to type.display_name, elemental_type_path(type), class: "catalog-card d-block p-4" %>
+    </li>
+  <% end %>
+</ul>
