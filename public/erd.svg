@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 280" width="960" height="280" role="img" aria-labelledby="title">
+  <title id="title">Kanto Pokédex database diagram</title>
+  <rect width="960" height="280" rx="16" fill="#e6f1e9"/>
+  <g fill="#fff" stroke="#47665a" stroke-width="2">
+    <rect x="20" y="28" width="254" height="224" rx="10"/>
+    <rect x="353" y="28" width="254" height="224" rx="10"/>
+    <rect x="686" y="28" width="254" height="224" rx="10"/>
+    <path d="M274 140H353 M607 140H686"/>
+  </g>
+  <g font-family="system-ui,sans-serif" fill="#16372e">
+    <g font-size="20" font-weight="bold">
+      <text x="36" y="61">pokemon</text>
+      <text x="369" y="61">pokemon_typings</text>
+      <text x="702" y="61">elemental_types</text>
+    </g>
+    <g font-size="15">
+      <text x="36" y="95">id (PK)</text>
+      <text x="36" y="119">dex_number, identifier</text>
+      <text x="36" y="143">height_dm, weight_hg</text>
+      <text x="36" y="167">base_experience (optional)</text>
+      <text x="36" y="191">created_at, updated_at</text>
+      <text x="369" y="95">id (PK)</text>
+      <text x="369" y="119">pokemon_id (FK)</text>
+      <text x="369" y="143">elemental_type_id (FK)</text>
+      <text x="369" y="167">slot</text>
+      <text x="369" y="191">created_at, updated_at</text>
+      <text x="702" y="95">id (PK)</text>
+      <text x="702" y="119">source_id, identifier</text>
+      <text x="702" y="143">created_at, updated_at</text>
+      <text x="279" y="132">1</text>
+      <text x="319" y="132">0..*</text>
+      <text x="612" y="132">0..*</text>
+      <text x="673" y="132">1</text>
+    </g>
+  </g>
+</svg>
