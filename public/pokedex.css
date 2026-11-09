@@ -266,6 +266,7 @@ a:hover { color: #0a382b; }
 .expedition-atlas, .expedition-log { min-width: 0; }
 @media (min-width: 992px) {
   .expedition-layout { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+  .expedition-full .expedition-layout { grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); }
 }
 .expedition-grid summary { color: #185644; font-size: .85rem; font-weight: 700; cursor: pointer; }
 .expedition-subtitle { margin-bottom: .65rem; color: #486052; font-size: .8rem; }
@@ -278,6 +279,10 @@ a:hover { color: #0a382b; }
 }
 
 .encounter-map svg { display: block; width: 100%; }
+.encounter-map-link { display: block; color: #fff9eb; text-decoration: none; }
+.encounter-map-link > span { display: block; padding: .65rem 1rem; background: #173c31; font-weight: 750; }
+.encounter-map-link:hover { color: #fff9eb; text-decoration: underline; }
+.encounter-map-link:focus-visible { outline-offset: -4px; }
 .encounter-map figcaption { padding: .7rem 1rem; font-size: .85rem; }
 .encounter-pin circle { fill: #80320d; stroke: #fff; stroke-width: 7; }
 .encounter-pin text { fill: #fff; font-size: 36px; font-weight: 800; }

@@ -1,0 +1,4 @@
+<% content_for :title, "#{@pokemon.display_name} encounter map" %>
+<p><%= link_to "← Back to #{@pokemon.display_name}", pokemon_path(@pokemon, anchor: "encounter-map-heading") %></p>
+<h1 class="pokemon-detail-name"><%= @pokemon.display_name %> encounter map</h1>
+<%= render "encounter_map", full_page: true %>

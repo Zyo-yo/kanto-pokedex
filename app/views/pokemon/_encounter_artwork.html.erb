@@ -1,0 +1,13 @@
+<svg viewBox="0 0 1856 1312" role="img" aria-labelledby="kanto-art-title kanto-art-description">
+  <title id="kanto-art-title">Illustrated Kanto map for <%= @pokemon.display_name %></title>
+  <desc id="kanto-art-description">Numbered pins mark approximate encounter areas. The matching numbers appear in the location list.</desc>
+  <image href="/kanto-lets-go.jpg" width="1856" height="1312" />
+  <% marker_numbers.each do |location, number| %>
+    <% x, y = location.artwork_point %>
+    <g transform="translate(<%= x %> <%= y %>)" class="encounter-pin">
+      <title><%= number %>. <%= location.name %></title>
+      <circle r="32" />
+      <text text-anchor="middle" dominant-baseline="central"><%= number %></text>
+    </g>
+  <% end %>
+</svg>

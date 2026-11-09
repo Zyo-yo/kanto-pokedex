@@ -1,4 +1,5 @@
-<section class="expedition mt-4" aria-labelledby="encounter-map-heading">
+<% full_page = local_assigns.fetch(:full_page, false) %>
+<section class="expedition mt-4<%= ' expedition-full' if full_page %>" aria-labelledby="encounter-map-heading">
   <% locations = @encounters_by_location.keys.sort_by { |location| [location.artwork_point ? 0 : 1, location.name] } %>
   <% marker_numbers = locations.select(&:artwork_point).each_with_index.to_h { |location, index| [location, index + 1] } %>
   <header class="expedition-heading">
@@ -12,19 +13,14 @@
   <div class="expedition-layout">
     <div class="expedition-atlas">
       <figure class="encounter-map mb-2">
-        <svg viewBox="0 0 1856 1312" role="img" aria-labelledby="kanto-art-title kanto-art-description">
-          <title id="kanto-art-title">Illustrated Kanto map for <%= @pokemon.display_name %></title>
-          <desc id="kanto-art-description">Numbered pins mark approximate encounter areas. The matching numbers appear in the location list.</desc>
-          <image href="/kanto-lets-go.jpg" width="1856" height="1312" />
-          <% marker_numbers.each do |location, number| %>
-            <% x, y = location.artwork_point %>
-            <g transform="translate(<%= x %> <%= y %>)" class="encounter-pin">
-              <title><%= number %>. <%= location.name %></title>
-              <circle r="32" />
-              <text text-anchor="middle" dominant-baseline="central"><%= number %></text>
-            </g>
+        <% if full_page %>
+          <%= render "encounter_artwork", marker_numbers: marker_numbers %>
+        <% else %>
+          <%= link_to map_pokemon_path(@pokemon), class: "encounter-map-link" do %>
+            <%= render "encounter_artwork", marker_numbers: marker_numbers %>
+            <span>Open full Kanto map <span aria-hidden="true">↗</span></span>
           <% end %>
-        </svg>
+        <% end %>
         <figcaption><strong>Illustrated Kanto atlas</strong><br>Pin positions are approximate. <%= link_to "Let's Go map artwork", "https://pokemonletsgo.pokemon.com/en-gb/kanto-region/" %> by The Pokémon Company.</figcaption>
       </figure>
 
