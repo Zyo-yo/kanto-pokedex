@@ -179,3 +179,35 @@ a:hover { color: #0a382b; }
 .type-fairy    { --type-bg: #fae5f3; --type-fg: #7d315e; }
 
 .erd { max-width: 100%; height: auto; }
+
+.encounter-map {
+  overflow: hidden;
+  border: 1px solid #abc3bd;
+  border-radius: .8rem;
+  background: #f1f7f4;
+}
+
+.encounter-map svg { display: block; width: 100%; }
+.encounter-map figcaption { padding: .7rem 1rem; font-size: .85rem; }
+.encounter-cell { fill: #ed862c; stroke: #7f3008; stroke-width: .11; }
+.encounter-key {
+  display: inline-block;
+  width: .75em;
+  height: .75em;
+  margin-inline-end: .3em;
+  border: 1px solid #7f3008;
+  border-radius: .15em;
+  background: #ed862c;
+}
+
+.encounter-locations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: .65rem;
+}
+
+.encounter-locations li {
+  padding: .7rem .85rem;
+  border: 1px solid #d6dfd8;
+  border-radius: .5rem;
+}

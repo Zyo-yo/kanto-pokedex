@@ -1,0 +1,37 @@
+<section class="mt-4" aria-labelledby="encounter-map-heading">
+  <h2 id="encounter-map-heading" class="h4">Kanto encounter map</h2>
+  <p class="text-body-secondary">FireRed and LeafGreen · In-game town-map grid</p>
+
+  <figure class="encounter-map mb-3">
+    <svg viewBox="0 0 22 15" role="img" aria-labelledby="kanto-grid-title kanto-grid-description">
+      <title id="kanto-grid-title">Kanto encounter map for <%= @pokemon.display_name %></title>
+      <desc id="kanto-grid-description">Orange squares mark recorded encounters. The location list identifies each area and game.</desc>
+      <image href="/kanto-map.svg" width="22" height="15" />
+      <% @encounter_cells.each do |x, y| %>
+        <rect x="<%= x + 0.08 %>" y="<%= y + 0.08 %>" width="0.84" height="0.84" rx="0.18" class="encounter-cell" />
+      <% end %>
+    </svg>
+    <figcaption><span class="encounter-key" aria-hidden="true"></span> Recorded encounter on this grid</figcaption>
+  </figure>
+
+  <% if @encounters_by_location.empty? %>
+    <p class="alert alert-light mb-0">PokéAPI has no recorded encounters for this Pokémon in FireRed or LeafGreen. Some Pokémon are obtained through evolution, gifts, trades, or events.</p>
+  <% else %>
+    <% if @encounter_cells.empty? %>
+      <p class="text-body-secondary">The recorded locations below fall outside this grid or have no verified map match.</p>
+    <% end %>
+    <ul class="encounter-locations list-unstyled mb-0">
+      <% @encounters_by_location.sort_by { |location, _| [location.map_cells.empty? ? 1 : 0, location.name] }.each do |location, encounters| %>
+        <li>
+          <strong><%= location.name %></strong>
+          <% if location.map_cells.empty? %>
+            <span class="text-body-secondary small">· Unmapped</span>
+          <% end %>
+          <% encounters.group_by(&:game_version).sort.each do |version, records| %>
+            <span class="d-block small"><%= KantoEncounter::GAME_NAMES.fetch(version) %> · <%= records.map { |record| record.encounter_method.titleize }.uniq.sort.join(", ") %></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

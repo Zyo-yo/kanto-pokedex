@@ -1,4 +1,5 @@
 require "csv"
+require "json"
 
 def source_rows(filename)
   CSV.read(Rails.root.join("db", "data", filename), headers: true, encoding: "bom|utf-8")
@@ -46,6 +47,22 @@ ApplicationRecord.transaction do
       pokemon.pokemon_typings.create!(slot: slot, elemental_type_id: elemental_type_id)
     end
   end
+
+  locations_by_identifier = source_rows("kanto_locations.csv").to_h do |row|
+    identifier = row.fetch("identifier")
+    location = KantoLocation.find_or_initialize_by(identifier: identifier)
+    location.update!(name: row.fetch("name"), map_cells: JSON.parse(row.fetch("map_cells")))
+    [identifier, location]
+  end
+
+  source_rows("kanto_encounters.csv").each do |row|
+    pokemon_by_source_id.fetch(row.fetch("dex_number")).kanto_encounters.find_or_create_by!(
+      kanto_location: locations_by_identifier.fetch(row.fetch("location")),
+      game_version: row.fetch("version"),
+      encounter_method: row.fetch("method")
+    )
+  end
 end
 
 puts "Imported #{Pokemon.count} Pokémon, #{ElementalType.count} types, and #{PokemonTyping.count} typings."
+puts "Imported #{KantoLocation.count} Kanto locations and #{KantoEncounter.count} encounter combinations."

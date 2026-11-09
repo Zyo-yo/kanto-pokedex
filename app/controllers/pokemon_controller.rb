@@ -24,5 +24,7 @@ class PokemonController < ApplicationController
 
   def show
     @pokemon = Pokemon.includes(pokemon_typings: :elemental_type).find(params[:id])
+    @encounters_by_location = @pokemon.kanto_encounters.includes(:kanto_location).group_by(&:kanto_location)
+    @encounter_cells = @encounters_by_location.keys.flat_map(&:map_cells).uniq
   end
 end

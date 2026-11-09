@@ -3,6 +3,7 @@ class Pokemon < ApplicationRecord
 
   has_many :pokemon_typings, -> { order(:slot) }, dependent: :destroy, inverse_of: :pokemon
   has_many :elemental_types, through: :pokemon_typings
+  has_many :kanto_encounters, dependent: :destroy
 
   validates :dex_number, uniqueness: true, numericality: { only_integer: true, greater_than: 0 }
   validates :identifier, presence: true, uniqueness: true

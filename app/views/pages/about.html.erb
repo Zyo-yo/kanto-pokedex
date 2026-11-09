@@ -25,7 +25,15 @@
     <p>One Pokémon can have up to two types. One type can belong to many Pokémon. The type pages and search dropdown use that same relationship.</p>
   </section>
   <section class="col-12">
-    <h2>Database diagram</h2>
+    <h2>Catalog database diagram</h2>
     <img class="erd" src="/erd.svg" width="960" height="280" alt="Each Pokémon and each elemental type can have many Pokémon typings. A Pokémon typing belongs to exactly one Pokémon and one elemental type.">
+  </section>
+  <section class="col-12">
+    <h2>Kanto encounter data</h2>
+    <p>The detail pages use <%= link_to "PokéAPI's FireRed and LeafGreen encounter data", "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv" %>
+      and the <%= link_to "FireRed Kanto town-map grid", "https://github.com/pret/pokefirered/blob/master/src/data/region_map/region_map_layout_kanto.h" %>.
+      The highlighted squares use in-game grid coordinates. The map covers mainland Kanto and nearby routes. The location list also includes records outside this grid.</p>
+    <p><code>kanto_locations</code> stores the source identifier, name, and grid cells.
+      <code>kanto_encounters</code> links a Pokémon and a location and stores the game version and encounter method.</p>
   </section>
 </div>
