@@ -1,7 +1,7 @@
-<header class="mb-4">
-  <p class="eyebrow">FIELD GUIDE / KANTO</p>
+<header class="dex-banner mb-4">
+  <p class="dex-kicker">Kanto Field Guide · Vol. 01</p>
   <h1 class="display-4">Kanto Pokédex</h1>
-  <p class="lead">Explore the original 151 Pokémon by name and elemental type.</p>
+  <p class="lead mb-0">From Bulbasaur to Mew. Find a familiar face or follow a type through all 151 entries.</p>
 </header>
 
 <%= form_with url: root_path, method: :get, class: "row g-3 align-items-end mb-4" do |form| %>
@@ -20,9 +20,9 @@
   </div>
 <% end %>
 
-<p class="text-body-secondary"><%= pluralize(@total, "result") %></p>
+<p class="dex-results"><span>Field index</span><span><%= pluralize(@total, "result") %></span></p>
 <% if @pokemon.any? %>
-  <ul class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 list-unstyled">
+  <ul class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-2 g-sm-3 list-unstyled">
     <%= render partial: "pokemon/card", collection: @pokemon, as: :entry %>
   </ul>
   <%= render "pagination" if @page_count > 1 %>

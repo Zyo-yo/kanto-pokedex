@@ -2,6 +2,6 @@
 <p><%= link_to "← All types", elemental_types_path %></p>
 <h1><span class="type-pill type-<%= @type.identifier %> type-heading"><%= @type.display_name %></span></h1>
 <p class="text-body-secondary">PokéAPI type ID <%= @type.source_id %> · <%= pluralize(@pokemon.size, "entry") %></p>
-<ul class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 list-unstyled">
+<ul class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-2 g-sm-3 list-unstyled">
   <%= render partial: "pokemon/card", collection: @pokemon, as: :entry %>
 </ul>
