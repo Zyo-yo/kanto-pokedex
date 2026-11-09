@@ -3,9 +3,9 @@
     <%= image_tag "/sprites/#{entry.dex_number}.png", alt: "", width: 112, height: 112,
       loading: "lazy", class: "pokemon-sprite pokemon-sprite-card" %>
     <p class="eyebrow mb-2">#<%= format("%03d", entry.dex_number) %></p>
-    <h2 class="h4"><%= link_to entry.display_name, pokemon_path(entry) %></h2>
+    <h2 class="pokemon-card-name"><%= link_to entry.display_name, pokemon_path(entry) %></h2>
     <% entry.elemental_types.each do |type| %>
-      <%= link_to type.display_name, elemental_type_path(type), class: "type-pill" %>
+      <%= link_to type.display_name, elemental_type_path(type), class: "type-pill type-#{type.identifier}" %>
     <% end %>
   </div>
 </li>

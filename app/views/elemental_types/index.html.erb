@@ -5,7 +5,7 @@
 <ul class="row row-cols-2 row-cols-md-3 g-3 list-unstyled mt-3">
   <% @types.each do |type| %>
     <li class="col">
-      <%= link_to type.display_name, elemental_type_path(type), class: "catalog-card d-block p-4" %>
+      <%= link_to type.display_name, elemental_type_path(type), class: "type-pill type-#{type.identifier} d-block text-center p-3" %>
     </li>
   <% end %>
 </ul>

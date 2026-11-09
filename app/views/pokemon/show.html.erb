@@ -4,18 +4,26 @@
   <section class="col-lg-7">
     <div class="catalog-card p-4">
       <p class="eyebrow">#<%= format("%03d", @pokemon.dex_number) %></p>
-      <h1><%= @pokemon.display_name %></h1>
+      <h1 class="pokemon-detail-name"><%= @pokemon.display_name %></h1>
       <%= image_tag "/sprites/#{@pokemon.dex_number}.png", alt: "", width: 272, height: 272,
         class: "pokemon-sprite pokemon-sprite-detail" %>
-      <dl class="row mb-0 mt-4">
-        <dt class="col-6">Source identifier</dt>
-        <dd class="col-6"><%= @pokemon.identifier %></dd>
-        <dt class="col-6">Height</dt>
-        <dd class="col-6"><%= @pokemon.height_dm / 10.0 %> m</dd>
-        <dt class="col-6">Weight</dt>
-        <dd class="col-6"><%= @pokemon.weight_hg / 10.0 %> kg</dd>
-        <dt class="col-6">Base experience</dt>
-        <dd class="col-6"><%= @pokemon.base_experience || "Unavailable" %></dd>
+      <dl class="pokemon-stats mt-4 mb-0">
+        <div class="pokemon-stat">
+          <dt>Source identifier</dt>
+          <dd><%= @pokemon.identifier %></dd>
+        </div>
+        <div class="pokemon-stat stat-height">
+          <dt>Height</dt>
+          <dd><%= @pokemon.height_dm / 10.0 %> m</dd>
+        </div>
+        <div class="pokemon-stat stat-weight">
+          <dt>Weight</dt>
+          <dd><%= @pokemon.weight_hg / 10.0 %> kg</dd>
+        </div>
+        <div class="pokemon-stat stat-experience">
+          <dt>Base experience</dt>
+          <dd><%= @pokemon.base_experience || "Unavailable" %></dd>
+        </div>
       </dl>
     </div>
   </section>
@@ -24,7 +32,8 @@
       <h2 class="h4">Elemental types</h2>
       <ol class="mb-0 ps-4">
         <% @pokemon.pokemon_typings.each do |typing| %>
-          <li><%= link_to typing.elemental_type.display_name, elemental_type_path(typing.elemental_type) %></li>
+          <% type = typing.elemental_type %>
+          <li><%= link_to type.display_name, elemental_type_path(type), class: "type-pill type-#{type.identifier}" %></li>
         <% end %>
       </ol>
     </div>
