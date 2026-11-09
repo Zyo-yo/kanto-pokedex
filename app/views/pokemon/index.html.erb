@@ -1,0 +1,31 @@
+<header class="mb-4">
+  <p class="eyebrow">FIELD GUIDE / KANTO</p>
+  <h1 class="display-4">Kanto Pokédex</h1>
+  <p class="lead">Explore the original 151 Pokémon by name and elemental type.</p>
+</header>
+
+<%= form_with url: root_path, method: :get, class: "row g-3 align-items-end mb-4" do |form| %>
+  <div class="col-md-5">
+    <%= form.label :q, "Pokémon name", class: "form-label" %>
+    <%= form.search_field :q, value: @query, placeholder: "e.g. Charizard", class: "form-control" %>
+  </div>
+  <div class="col-md-4">
+    <%= form.label :elemental_type_id, "Type", class: "form-label" %>
+    <%= form.collection_select :elemental_type_id, @types, :id, :display_name,
+      { include_blank: "All types", selected: @type_id }, { class: "form-select" } %>
+  </div>
+  <div class="col-md-3 d-flex gap-2 align-items-center">
+    <%= form.submit "Search", class: "btn btn-dark" %>
+    <%= link_to "Clear", root_path, class: "btn btn-outline-dark" %>
+  </div>
+<% end %>
+
+<p class="text-body-secondary"><%= pluralize(@total, "result") %></p>
+<% if @pokemon.any? %>
+  <ul class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 list-unstyled">
+    <%= render partial: "pokemon/card", collection: @pokemon, as: :entry %>
+  </ul>
+  <%= render "pagination" if @page_count > 1 %>
+<% else %>
+  <p class="alert alert-light">No Pokémon match those filters.</p>
+<% end %>
