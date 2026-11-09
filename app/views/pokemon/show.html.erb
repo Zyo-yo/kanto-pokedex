@@ -1,0 +1,30 @@
+<% content_for :title, @pokemon.display_name %>
+<p><%= link_to "← Pokédex", root_path %></p>
+<div class="row g-4">
+  <section class="col-lg-7">
+    <div class="catalog-card p-4">
+      <p class="eyebrow">#<%= format("%03d", @pokemon.dex_number) %></p>
+      <h1><%= @pokemon.display_name %></h1>
+      <dl class="row mb-0 mt-4">
+        <dt class="col-6">Source identifier</dt>
+        <dd class="col-6"><%= @pokemon.identifier %></dd>
+        <dt class="col-6">Height</dt>
+        <dd class="col-6"><%= @pokemon.height_dm / 10.0 %> m</dd>
+        <dt class="col-6">Weight</dt>
+        <dd class="col-6"><%= @pokemon.weight_hg / 10.0 %> kg</dd>
+        <dt class="col-6">Base experience</dt>
+        <dd class="col-6"><%= @pokemon.base_experience || "Unavailable" %></dd>
+      </dl>
+    </div>
+  </section>
+  <section class="col-lg-5">
+    <div class="catalog-card p-4 h-100">
+      <h2 class="h4">Elemental types</h2>
+      <ol class="mb-0 ps-4">
+        <% @pokemon.pokemon_typings.each do |typing| %>
+          <li><%= link_to typing.elemental_type.display_name, elemental_type_path(typing.elemental_type) %></li>
+        <% end %>
+      </ol>
+    </div>
+  </section>
+</div>
