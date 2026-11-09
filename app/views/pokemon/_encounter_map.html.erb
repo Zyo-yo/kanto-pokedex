@@ -1,18 +1,40 @@
 <section class="mt-4" aria-labelledby="encounter-map-heading">
+  <% locations = @encounters_by_location.keys.sort_by { |location| [location.artwork_point ? 0 : 1, location.name] } %>
+  <% marker_numbers = locations.select(&:artwork_point).each_with_index.to_h { |location, index| [location, index + 1] } %>
   <h2 id="encounter-map-heading" class="h4">Kanto encounter map</h2>
-  <p class="text-body-secondary">FireRed and LeafGreen · In-game town-map grid</p>
+  <p class="text-body-secondary">FireRed and LeafGreen encounters · Let's Go Kanto artwork</p>
 
   <figure class="encounter-map mb-3">
-    <svg viewBox="0 0 22 15" role="img" aria-labelledby="kanto-grid-title kanto-grid-description">
-      <title id="kanto-grid-title">Kanto encounter map for <%= @pokemon.display_name %></title>
-      <desc id="kanto-grid-description">Orange squares mark recorded encounters. The location list identifies each area and game.</desc>
-      <image href="/kanto-map.svg" width="22" height="15" />
-      <% @encounter_cells.each do |x, y| %>
-        <rect x="<%= x + 0.08 %>" y="<%= y + 0.08 %>" width="0.84" height="0.84" rx="0.18" class="encounter-cell" />
+    <svg viewBox="0 0 1856 1312" role="img" aria-labelledby="kanto-art-title kanto-art-description">
+      <title id="kanto-art-title">Illustrated Kanto map for <%= @pokemon.display_name %></title>
+      <desc id="kanto-art-description">Numbered pins mark approximate encounter areas. The matching numbers appear in the location list.</desc>
+      <image href="/kanto-lets-go.jpg" width="1856" height="1312" />
+      <% marker_numbers.each do |location, number| %>
+        <% x, y = location.artwork_point %>
+        <g transform="translate(<%= x %> <%= y %>)" class="encounter-pin">
+          <title><%= number %>. <%= location.name %></title>
+          <circle r="32" />
+          <text text-anchor="middle" dominant-baseline="central"><%= number %></text>
+        </g>
       <% end %>
     </svg>
-    <figcaption><span class="encounter-key" aria-hidden="true"></span> Recorded encounter on this grid</figcaption>
+    <figcaption>Numbered pins show approximate areas. <%= link_to "Map artwork", "https://pokemonletsgo.pokemon.com/en-gb/kanto-region/" %> by The Pokémon Company.</figcaption>
   </figure>
+
+  <details class="mb-3">
+    <summary>Show original FireRed and LeafGreen grid</summary>
+    <figure class="encounter-map my-2">
+      <svg viewBox="0 0 22 15" role="img" aria-labelledby="kanto-grid-title kanto-grid-description">
+        <title id="kanto-grid-title">Kanto encounter map for <%= @pokemon.display_name %></title>
+        <desc id="kanto-grid-description">Orange squares mark recorded encounters. The location list identifies each area and game.</desc>
+        <image href="/kanto-map.svg" width="22" height="15" />
+        <% @encounter_cells.each do |x, y| %>
+          <rect x="<%= x + 0.08 %>" y="<%= y + 0.08 %>" width="0.84" height="0.84" rx="0.18" class="encounter-cell" />
+        <% end %>
+      </svg>
+      <figcaption><span class="encounter-key" aria-hidden="true"></span> Recorded encounter on this grid</figcaption>
+    </figure>
+  </details>
 
   <% if @encounters_by_location.empty? %>
     <p class="alert alert-light mb-0">PokéAPI has no recorded encounters for this Pokémon in FireRed or LeafGreen. Some Pokémon are obtained through evolution, gifts, trades, or events.</p>
@@ -21,13 +43,16 @@
       <p class="text-body-secondary">The recorded locations below fall outside this grid or have no verified map match.</p>
     <% end %>
     <ul class="encounter-locations list-unstyled mb-0">
-      <% @encounters_by_location.sort_by { |location, _| [location.map_cells.empty? ? 1 : 0, location.name] }.each do |location, encounters| %>
+      <% locations.each do |location| %>
         <li>
+          <% if marker_numbers.key?(location) %>
+            <span class="encounter-list-number"><%= marker_numbers.fetch(location) %></span>
+          <% end %>
           <strong><%= location.name %></strong>
-          <% if location.map_cells.empty? %>
+          <% unless marker_numbers.key?(location) %>
             <span class="text-body-secondary small">· Unmapped</span>
           <% end %>
-          <% encounters.group_by(&:game_version).sort.each do |version, records| %>
+          <% @encounters_by_location.fetch(location).group_by(&:game_version).sort.each do |version, records| %>
             <span class="d-block small"><%= KantoEncounter::GAME_NAMES.fetch(version) %> · <%= records.map { |record| record.encounter_method.titleize }.uniq.sort.join(", ") %></span>
           <% end %>
         </li>

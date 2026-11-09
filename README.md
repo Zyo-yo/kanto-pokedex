@@ -38,6 +38,8 @@ Each table also has a Rails primary key and timestamps. Type data reflects the P
 
 The seed also imports 72 locations and 1,399 distinct Pokémon, location, game version, and encounter method combinations for FireRed and LeafGreen. These extracts join PokéAPI's encounter, slot, method, version, area, and location CSVs. They collapse floors and encounter slots into named locations. The coordinate cells and schematic are derived from both layers of the [FireRed Kanto town-map grid](https://github.com/pret/pokefirered/blob/master/src/data/region_map/region_map_layout_kanto.h). Coordinates are zero-based column and row positions on its 22×15 grid. Areas outside this grid or without a verified section match are listed as unmapped.
 
+The illustrated view uses the [official Let's Go Kanto artwork](https://pokemonletsgo.pokemon.com/en-gb/kanto-region/). Its numbered pins use manually placed image coordinates for approximate areas. The original imported grid can be opened below the illustration.
+
 ## GitHub submission
 
 The local history is on `master`. Create an empty GitHub repository, then run the following with its URL in place of the example:

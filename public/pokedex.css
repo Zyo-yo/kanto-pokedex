@@ -189,6 +189,20 @@ a:hover { color: #0a382b; }
 
 .encounter-map svg { display: block; width: 100%; }
 .encounter-map figcaption { padding: .7rem 1rem; font-size: .85rem; }
+.encounter-pin circle { fill: #80320d; stroke: #fff; stroke-width: 7; }
+.encounter-pin text { fill: #fff; font-size: 36px; font-weight: 800; }
+.encounter-list-number {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  margin-inline-end: .2rem;
+  border-radius: 50%;
+  background: #80320d;
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 750;
+}
 .encounter-cell { fill: #ed862c; stroke: #7f3008; stroke-width: .11; }
 .encounter-key {
   display: inline-block;
