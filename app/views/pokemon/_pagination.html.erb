@@ -1,0 +1,10 @@
+<nav aria-label="Search result pages" class="d-flex align-items-center flex-wrap gap-3 mt-4">
+  <% filters = { q: @query.presence, elemental_type_id: @type_id }.compact %>
+  <% if @page > 1 %>
+    <%= link_to "Previous", root_path(**filters, page: @page - 1), class: "btn btn-outline-dark", rel: "prev" %>
+  <% end %>
+  <span>Page <%= @page %> of <%= @page_count %></span>
+  <% if @page < @page_count %>
+    <%= link_to "Next", root_path(**filters, page: @page + 1), class: "btn btn-outline-dark", rel: "next" %>
+  <% end %>
+</nav>
