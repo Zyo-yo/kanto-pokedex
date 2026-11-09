@@ -12,7 +12,7 @@ ruby bin/rails db:prepare
 ruby bin/rails server
 ```
 
-Open [localhost:3000](http://localhost:3000). The first database setup loads the bundled CSV files. To rerun the importer after setup, use `ruby bin/rails db:seed`. Bootstrap loads from a CDN when the browser has internet access.
+Open [localhost:3000](http://localhost:3000). The first database setup loads the bundled CSV files. To rerun the importer after setup, use `ruby bin/rails db:seed`. Bootstrap is bundled so the catalog can be demonstrated offline once the gems are installed.
 
 ## Walk through the code
 
